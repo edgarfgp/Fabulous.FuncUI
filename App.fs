@@ -3,12 +3,15 @@ namespace MyApp
 open Avalonia.FuncUI
 open Avalonia.FuncUI.DSL
 open Avalonia.Controls
-    
+
+open Fabulous
+open Fabulous.Avalonia
+
 type Components =
     static member Counter() =
         Component (fun ctx ->
             let state = ctx.useState 0
-    
+
             DockPanel.create [
                 DockPanel.children [
                     Button.create [
@@ -19,6 +22,7 @@ type Components =
                         Button.onClick (fun _ -> state.Set(state.Current + 1))
                         Button.content "Increment"
                     ]
+
                     TextBlock.create [
                         TextBlock.dock Dock.Top
                         TextBlock.text (string state.Current)
@@ -26,7 +30,7 @@ type Components =
                 ]
             ]
         )
-        
+
 open Fabulous
 open Fabulous.Avalonia
 open Fabulous.StackAllocatedCollections.StackList
@@ -36,7 +40,7 @@ type IFuncUIControl =
     
 module FuncUIControl =
     let WidgetKey = Widgets.registerWithFactory(fun _ -> Components.Counter())
-  
+
 [<AutoOpen>]
 module FuncUIControlBuilders =
     
